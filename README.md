@@ -47,5 +47,5 @@ Want to contribute or run locally?
 ```bash
 git clone https://github.com/spyrosxd/tson.git
 cd tson
-npm install
-npm run dev
+bun install
+bun dev

@@ -10,11 +10,16 @@
   },
   "dependencies": {
     "@tailwindcss/vite": "^4.1.12",
-    "preact": "^10.27.0",
+    "@vercel/analytics": "^1.5.0",
+    "lucide-react": "^0.539.0",
+    "react": "^19.1.1",
+    "react-dom": "^19.1.1",
     "tailwindcss": "^4.1.12"
   },
   "devDependencies": {
-    "@preact/preset-vite": "^2.10.2",
+    "@types/react": "^19.1.10",
+    "@types/react-dom": "^19.1.7",
+    "@vitejs/plugin-react": "^5.0.0",
     "typescript": "~5.8.3",
     "vite": "^7.1.2"
   }

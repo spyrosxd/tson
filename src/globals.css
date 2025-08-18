@@ -1,0 +1,11 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');
+@import "tailwindcss";
+
+@custom-variant dark (&:is(.dark *));
+
+@layer base {
+  * {
+    @apply m-0 p-0 box-border font-sans;
+    font-family: "Inter", sans-serif;
+  }
+}
