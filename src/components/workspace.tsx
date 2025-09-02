@@ -19,6 +19,32 @@ export default function Workspace() {
   const [rootName, setRootName] = useState<string>("Root");
   const [copied, setCopied] = useState<boolean>(false);
 
+  const handleKeyDown = (e: React.KeyboardEvent<HTMLTextAreaElement>) => {
+    if (e.key === "Tab") {
+      e.preventDefault();
+
+      const textarea = e.target as HTMLTextAreaElement;
+      const start = textarea.selectionStart;
+      const end = textarea.selectionEnd;
+      const value = textarea.value;
+
+      // Insert tab at cursor position
+      const newValue = value.slice(0, start) + "\t" + value.slice(end);
+
+      // Update the textarea value
+      textarea.value = newValue;
+      setRaw(newValue);
+
+      // Move cursor after the inserted tab
+      const newCursorPos = start + 1;
+      textarea.setSelectionRange(newCursorPos, newCursorPos);
+    }
+  };
+
+  const handleInput = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
+    setRaw(e.target.value);
+  };
+
   const output = useMemo(() => {
     try {
       setError(null);
@@ -41,7 +67,9 @@ export default function Workspace() {
                 <FileJson /> Raw JSON
               </h2>
 
-              <div className="text-xs text-zinc-500 dark:text-zinc-400">Paste Raw JSON Input</div>
+              <div className="text-xs text-zinc-500 dark:text-zinc-400">
+                Paste Raw JSON Input
+              </div>
             </div>
             <div className="flex items-center gap-2">
               <input
@@ -68,7 +96,8 @@ export default function Workspace() {
           </div>
           <textarea
             value={raw}
-            onInput={(e) => setRaw((e.target as HTMLTextAreaElement).value)}
+            onKeyDown={handleKeyDown}
+            onChange={handleInput}
             className="min-h-[50dvh] w-full resize-y bg-transparent p-4 font-mono text-sm outline-none text-zinc-900 dark:text-zinc-100 placeholder:text-zinc-400 dark:placeholder:text-zinc-500"
             placeholder="Paste JSON here..."
           />
